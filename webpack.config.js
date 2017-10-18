@@ -2,13 +2,13 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-    template: './package-lock.jsonsrc/index.html',
+    template: 'src/index.html',
     filename: 'index.html',
     inject: 'body'
 });
 
 let config = {
-    entry: 'src/index.js',
+    entry: './src/index.js',
     output: {
         path: path.resolve('dist'),
         filename: 'bundle.js'
