@@ -12,12 +12,12 @@ export class BankApiService extends BaseApi {
 
     getTodaysCurrencies() {
         let today = new Date(Date.now());
-        let currentCurrencies = this.getCurrenciesForDate(today.getFullYear(), today.getMonth(), today.getDay());
+        let currentCurrencies = this.getCurrenciesForDate(today.getFullYear(), today.getMonth(), today.getDate());
 
         let yesterday = new Date(today);
         yesterday.setDate(yesterday.getDate() - 1);
 
-        let prevCurrencies = this.getCurrenciesForDate(yesterday.getFullYear(), yesterday.getMonth(), yesterday.getDay());
+        let prevCurrencies = this.getCurrenciesForDate(yesterday.getFullYear(), yesterday.getMonth(), yesterday.getDate());
         return Promise.all([currentCurrencies, prevCurrencies])
             .then(([current, previous]) => {
                 let result = current;
@@ -31,14 +31,20 @@ export class BankApiService extends BaseApi {
     getCurrenciesForDate(year, month, date) {
         let url = this.combineUrl(`/ExRates/Rates?onDate=${year}-${month}-${date}&Periodicity=0`);
         return http.get(url)
-            .then((response) => { response.data.map(v => this.parseEntity(v)) });
+            .then((response) => {
+                let result = response.data.map(v => this.parseEntity(v));
+                return result;
+            });
     }
 
     getRateCurrencyStatistics(curID, startDate, endDate) {
-        let startDateParsed = `${startDate.getFullYear()}-${startDate.getMonth()}-${startDate.getDay()}`;
-        let endDateParsed = `${endDate.getFullYear()}-${endDate.getMonth()}-${endDate.getDay()}`;
+        let startDateParsed = `${startDate.getFullYear()}-${startDate.getMonth()}-${startDate.getDate()}`;
+        let endDateParsed = `${endDate.getFullYear()}-${endDate.getMonth()}-${endDate.getDate()}`;
         let url = this.combineUrl(`/ExRates/Rates/Dynamics/${curID}?startDate=${startDateParsed}&endDate=${endDateParsed}`);
         return http.get(url)
-            .then((response) => { response.data.map(v => this.parseEntity(v)) });
+            .then((response) => {
+                let result = response.data.map(v => this.parseEntity(v));
+                return result;
+            });
     }
 }

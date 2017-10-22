@@ -5,12 +5,14 @@
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server",
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Artsiom Marozau",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.16.2",
+    "chart.js": "^1.1.1",
     "chartjs": "^0.3.24",
     "path": "^0.12.7",
     "react": "^16.0.0",
