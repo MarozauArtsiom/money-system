@@ -37,19 +37,21 @@ export default class App extends React.Component {
     render() {
         return (
             <div className='app'>
-                <div className='app__ex-rates-list'>
-                    <ExRatesList rates={this.state.rates}
-                                 isLoading={!this.state.rates}
-                                 onSelectRate={this.onSelectRate}
-                                 selectedRate={this.state.selectedRate}
-                    />
-                </div>
-                <div className='app__rate-information'>
-                    <RateInformation rate={this.props.selectedRate}/>
-                </div>
-                <div className='app__rate-statistic'>
-                    <RateStatistic rateCurrencyStatistic={this.state.rateCurrencyStatistic}
-                    />
+                <div className="app__container">
+                    <div className='app__ex-rates-list'>
+                        <ExRatesList rates={this.state.rates}
+                                     isLoading={!this.state.rates}
+                                     onSelectRate={this.onSelectRate}
+                                     selectedRate={this.state.selectedRate}
+                        />
+                    </div>
+                    <div className='app__rate-information'>
+                        <RateInformation rate={this.props.selectedRate} />
+                    </div>
+                    <div className='app__rate-statistic'>
+                        <RateStatistic rateCurrencyStatistic={this.state.rateCurrencyStatistic}
+                        />
+                    </div>
                 </div>
             </div>
         );
