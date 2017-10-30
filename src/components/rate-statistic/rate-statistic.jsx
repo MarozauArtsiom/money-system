@@ -13,9 +13,9 @@ export default class RateStatistic extends React.Component {
         return (
             <div>
                 <canvas id="myChart"
-                        ref={(canvas) => {
-                            this.canvas = canvas;
-                        }}
+                    ref={(canvas) => {
+                        this.canvas = canvas;
+                    }}
                 ></canvas>
             </div>
         )
@@ -45,15 +45,16 @@ export default class RateStatistic extends React.Component {
         let distanceValue = maxValue.curOfficialRate - minValue.curOfficialRate;
         let borderVal = 3 / 10;
 
-        var ctx = convas.getContext('2d');
-        var myChart = new Chart(ctx, {
+        let ctx = convas.getContext('2d');
+        let myChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: _.map(values, x => x.label),
                 datasets: [{
-                    label: 'Rates',
+                    label: this.props.rate.curName,
                     data: _.map(values, x => x.curOfficialRate),
-                    borderWidth: 1
+                    borderWidth: 1,
+                    backgroundColor: ['#0a7cdf']
                 }]
             },
             options: {

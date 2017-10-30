@@ -46,10 +46,11 @@ export default class App extends React.Component {
                         />
                     </div>
                     <div className='app__rate-information'>
-                        <RateInformation rate={this.props.selectedRate} />
+                        <RateInformation rate={this.state.selectedRate} />
                     </div>
                     <div className='app__rate-statistic'>
-                        <RateStatistic rateCurrencyStatistic={this.state.rateCurrencyStatistic}
+                        <RateStatistic rate={this.state.selectedRate}
+                                       rateCurrencyStatistic={this.state.rateCurrencyStatistic}
                         />
                     </div>
                 </div>
