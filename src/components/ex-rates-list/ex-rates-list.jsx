@@ -9,11 +9,15 @@ import ScrollContainer from "./../scroll-container/scroll-container.jsx";
 export default class ExRatesList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {filterValue: ''};
     }
 
     onRateClick(rate) {
         this.props.onSelectRate(rate);
+    }
+
+    filterInput(event) {
+        this.setState({ filterValue: event.target.value });
     }
 
     render() {
@@ -26,9 +30,7 @@ export default class ExRatesList extends React.Component {
                         <input id="filterInput"
                             type="text"
                             value={this.state.filterValue}
-                            onChange={(event) => {
-                                this.setState({ filterValue: event.target.value });
-                            }}
+                            onChange={this.filterInput.bind(this)}
                         />
                     </div>
                     <ScrollContainer>
@@ -43,11 +45,13 @@ export default class ExRatesList extends React.Component {
                                 return needToUse;
                             })
                             .map((rate) => {
-                                return <RateItem key={rate.curID}
-                                    rate={rate}
-                                    onSelect={() => this.onRateClick(rate)}
-                                    isSelected={this.props.selectedRate ? this.props.selectedRate.curID === rate.curID : false}
-                                ></RateItem>
+                                return (
+                                    <RateItem key={rate.curID}
+                                        rate={rate}
+                                        onSelect={() => this.onRateClick(rate)}
+                                        isSelected={this.props.selectedRate ? this.props.selectedRate.curID === rate.curID : false}
+                                    ></RateItem>
+                                )
                             })
                             .value()
                         }
