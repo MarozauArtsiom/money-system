@@ -16,8 +16,9 @@ export default class App extends React.Component {
             this.setState({ selectedRate: selectedRate });
             let now = Date.now();
             let startDay = new Date(now);
+            startDay.setMonth(startDay.getMonth() - 1);
+
             let endDate = new Date(now);
-            endDate.setMonth(endDate.getMonth() + 1);
 
             this.bankApiService.getRateCurrencyStatistics(selectedRate.curID, startDay, endDate)
                 .then((stats) => {
@@ -40,9 +41,9 @@ export default class App extends React.Component {
                 <div className="app__container">
                     <div className='app__ex-rates-list'>
                         <ExRatesList rates={this.state.rates}
-                                     isLoading={!this.state.rates}
-                                     onSelectRate={this.onSelectRate}
-                                     selectedRate={this.state.selectedRate}
+                            isLoading={!this.state.rates}
+                            onSelectRate={this.onSelectRate}
+                            selectedRate={this.state.selectedRate}
                         />
                     </div>
                     <div className='app__rate-information'>
@@ -50,7 +51,7 @@ export default class App extends React.Component {
                     </div>
                     <div className='app__rate-statistic'>
                         <RateStatistic rate={this.state.selectedRate}
-                                       rateCurrencyStatistic={this.state.rateCurrencyStatistic}
+                            rateCurrencyStatistic={this.state.rateCurrencyStatistic}
                         />
                     </div>
                 </div>

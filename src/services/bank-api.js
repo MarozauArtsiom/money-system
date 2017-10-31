@@ -38,8 +38,8 @@ export class BankApiService extends BaseApi {
     }
 
     getRateCurrencyStatistics(curID, startDate, endDate) {
-        let startDateParsed = `${startDate.getFullYear()}-${startDate.getMonth()}-${startDate.getDate()}`;
-        let endDateParsed = `${endDate.getFullYear()}-${endDate.getMonth()}-${endDate.getDate()}`;
+        let startDateParsed = startDate.toUTCString();
+        let endDateParsed = endDate.toUTCString();
         let url = this.combineUrl(`/ExRates/Rates/Dynamics/${curID}?startDate=${startDateParsed}&endDate=${endDateParsed}`);
         return http.get(url)
             .then((response) => {
